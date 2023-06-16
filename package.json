@@ -1,0 +1,26 @@
+{
+  "name": "hyathi-fullstack-task",
+  "version": "1.0.0",
+  "description": "Your task is to create an application that simulates a virtual Pokemon adoption scenario. The app should allow users to:",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaimadheshiya031/hyathi-fullstack-task.git"
+  },
+  "author": "jai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaimadheshiya031/hyathi-fullstack-task/issues"
+  },
+  "homepage": "https://github.com/jaimadheshiya031/hyathi-fullstack-task#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.0"
+  }
+}
