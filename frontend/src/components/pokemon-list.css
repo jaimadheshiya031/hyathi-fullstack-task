@@ -1,0 +1,18 @@
+/* pokemon-list.css */
+
+.pokemon-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+  }
+  
+  .pokemon-card h3 {
+    margin-top: 0;
+  }
+  
+  .pokemon-card p {
+    margin-bottom: 8px;
+  }
+  
