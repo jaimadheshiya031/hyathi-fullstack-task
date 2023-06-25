@@ -1,5 +1,5 @@
 import express from 'express';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import bodyParser from 'body-parser';
@@ -11,17 +11,17 @@ import Pokemon from './models/pokemon.js';
 const app = express();
 const port = 3000;
 
-app.use(helmet()); 
+// app.use(helmet()); 
 
-// Set the Content Security Policy headers
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      fontSrc: ["'self'", 'http://localhost:3000'],
-    },
-  })
-);
+// // Set the Content Security Policy headers
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       fontSrc: ["'self'", 'http://localhost:3000'],
+//     },
+//   })
+// );
 
 app.use(bodyParser.urlencoded({
     extended: true
