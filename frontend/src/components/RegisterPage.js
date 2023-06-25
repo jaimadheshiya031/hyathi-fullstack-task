@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [regSuccess,setRegSuccess]=useState(false);
+  const [passError,setPassError]=useState('');
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -12,11 +14,17 @@ function RegisterPage() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Send registration data to the server
-    fetch('/register', {
+    if (password.length < 6) {
+      setRegSuccess(false);
+      setPassError('Password must be at least 6 characters long.');
+    }
+    else{
+      setPassError('');
+   await fetch('/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +33,11 @@ function RegisterPage() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        console.log(data.message);
+        if(data.status==201)
+        setRegSuccess(true);
+        else
+        setRegSuccess(false);
         // Reset the form
         setUsername('');
         setPassword('');
@@ -33,6 +45,7 @@ function RegisterPage() {
       .catch(error => {
         console.error('Error registering user:', error);
       });
+    }
   };
 
   return (
@@ -53,6 +66,8 @@ function RegisterPage() {
         </label>
         </div>
         <br />
+        {passError && <p style={{color:'red'}}><strong>{passError}</strong></p>}
+        {regSuccess && <p style={{color:'green'}}><strong>Registration successful! You can now login.</strong></p>}
         <button type="submit"className="button">Register</button>
       </form>
     </div>

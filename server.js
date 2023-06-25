@@ -1,4 +1,5 @@
 import express from 'express';
+import helmet from 'helmet';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import bodyParser from 'body-parser';
@@ -9,6 +10,18 @@ import Pokemon from './models/pokemon.js';
 
 const app = express();
 const port = 3000;
+
+app.use(helmet()); 
+
+// Set the Content Security Policy headers
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      fontSrc: ["'self'", 'http://localhost:3000'],
+    },
+  })
+);
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -47,10 +60,10 @@ app.post('/register', async (req, res) => {
       // Save the user to the database
       await user.save();
   
-      res.status(201).json({ message: 'User registered successfully' });
+      res.status(201).json({ message:'user registered successfully',status:201 });
     } catch (error) {
       console.error('Error registering user:', error);
-      res.status(500).json({ error: 'Failed to register user' });
+      res.status(500).json({ error: 'Failed to register user',status:500 });
     }
   });
   
@@ -101,7 +114,7 @@ app.post('/register', async (req, res) => {
 app.get('/pokemon', getAllPokemon);
 
 // Adopt a Pokemon
-app.post('/pokemon/adopt', authenticateToken, adoptPokemon);
+app.post('/pokemon/adopt',authenticateToken, adoptPokemon);
 
 // Feed a Pokemon
 app.post('/pokemon/feed', authenticateToken, feedPokemon);
@@ -111,7 +124,10 @@ app.post('/pokemon/feed', authenticateToken, feedPokemon);
 // Middleware for authenticating JWT token
 function authenticateToken(req, res, next) {
   // Get the token from the request headers
-  const token = req.headers.authorization;
+  const bearerHeader = req.headers['authorization'];
+  const bearer=bearerHeader.split(" ");
+  const token= bearer[1];
+  console.log('token is'+token);
 
   if (!token) {
     return res.status(401).json({ error: 'Unauthorized' });

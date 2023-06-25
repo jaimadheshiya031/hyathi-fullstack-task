@@ -1,18 +1,85 @@
 /* pokemon-list.css */
 
+.pokemon-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
 .pokemon-card {
-    border: 1px solid #ccc;
-    padding: 16px;
-    margin-bottom: 16px;
-    border-radius: 4px;
-    background-color: #f5f5f5;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-image {
+  width: 200px;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.pokemon-breed {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.pokemon-age,
+.pokemon-health-status,
+.pokemon-last-fed {
+  margin-bottom: 5px;
+}
+
+
+  .adopt-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
   }
   
-  .pokemon-card h3 {
-    margin-top: 0;
+  .feed-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
   }
   
-  .pokemon-card p {
-    margin-bottom: 8px;
+  .button-group {
+    margin-top: 16px;
   }
+  
+  .button-group button:not(:last-child) {
+    margin-right: 8px;
+  }
+
+  .signout-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
   

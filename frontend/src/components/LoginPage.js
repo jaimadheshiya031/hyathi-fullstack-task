@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import '../components/loginRegister.css';
+import { useNavigate } from 'react-router-dom'
+import PokemonListPage from './PokemonListPage';
 
-function LoginPage() {
+
+function LoginPage({ setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError,setLoginError]=useState(false);
+  const [token,setToken]=useState('');
+
+  const navigate=useNavigate();
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -26,7 +34,17 @@ function LoginPage() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        if(data.token){
+        console.log(data.token);
+        localStorage.setItem('authToken',data.token);
+        setIsLoggedIn(true);
+        setToken(data.token);
+        navigate('/pokemon');
+        }
+        else{
+          setLoginError(true);
+        }
+        
         // Reset the form
         setUsername('');
         setPassword('');
@@ -38,6 +56,7 @@ function LoginPage() {
 
   return (
     <div className="container">
+      {/* <PokemonListPage token={token}/> */}
       <h2>Login</h2>
       <form onSubmit={handleSubmit} className="form">
         <div className="form-group">
@@ -54,6 +73,7 @@ function LoginPage() {
         </label>
         </div>
         <br />
+        {loginError && <p style={{color:'red'}}><strong>Invalid username or password. Please try again.</strong></p>}
         <button type="submit"className="button">Login</button>
       </form>
     </div>

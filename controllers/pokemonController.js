@@ -10,11 +10,15 @@ export async function getAllPokemon(req, res) {
     res.status(500).json({ error: 'Failed to get Pokemon' });
   }
 }
-
-// Adopt a Pokemon
+ function findById(id){
+  const pok= Pokemon.find(id);
+  return pok;
+}
+//Adopt a Pokemon
 export async function adoptPokemon(req, res) {
   try {
     const { pokemonId } = req.body;
+    console.log(pokemonId);
 
     // Check if the Pokemon is already adopted
     const pokemon = await findById(pokemonId);
@@ -37,6 +41,32 @@ export async function adoptPokemon(req, res) {
     res.status(500).json({ error: 'Failed to adopt Pokemon' });
   }
 }
+
+// Other controller functions...
+
+// Adopt a Pokemon
+// export async function adoptPokemon(req, res) {
+//   try {
+//     const { id } = req.body.pokemonID;
+//     console.log(id);
+
+//     // Check if the Pokemon has already been adopted
+//     const pokemon = await Pokemon.findById(id);
+//     if (pokemon.adopted) {
+//       return res.status(400).json({ error: 'Pokemon has already been adopted' });
+//     }
+
+//     // Mark the Pokemon as adopted
+//     pokemon.adopted = true;
+//     await pokemon.save();
+
+//     res.json({ message: 'Pokemon adopted successfully' });
+//   } catch (error) {
+//     console.error('Error adopting Pokemon::', error);
+//     res.status(500).json({ error: 'Failed to adopt Pokemon' });
+//   }
+// }
+
 
 // Feed a Pokemon
 export async function feedPokemon(req, res) {

@@ -1,12 +1,18 @@
 import { Schema, model } from 'mongoose';
 
 const pokemonSchema = new Schema({
+  id:{
+    type:Number
+  },
+  image:{
+    type:String
+  },
   breed: {
     type: String,
     required: true,
   },
   age: {
-    type: Number,
+    type: String,
     required: true,
   },
   healthStatus: {
@@ -18,6 +24,11 @@ const pokemonSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  adopted:{
+    type:Boolean,
+    default:false
+  }
+  
 });
 
 const Pokemon = model('Pokemon', pokemonSchema);
